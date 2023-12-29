@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+</head>
+<body>
+    <h1>Image Upload Page</h1>
+    
+    <!-- Display username from URL parameters -->
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" readonly>
+
+    <form id="imageUploadForm" enctype="multipart/form-data">
+        <!-- Your image upload form fields go here -->
+        <label for="image">Upload Image:</label>
+        <input type="file" id="image" name="image" accept="image/jpeg, image/png" required>
+
+        <button type="submit">Upload Image</button>
+    </form>
+
+    <script>
+        // Function to extract username from URL parameters
+        function getUsernameFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('username');
+        }
+
+        // Set the username in the textbox
+        const usernameInput = document.getElementById('username');
+        usernameInput.value = getUsernameFromUrl();
+
+        document.getElementById('imageUploadForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const username = getUsernameFromUrl();
+            const imageInput = document.getElementById('image');
+            const imageFile = imageInput.files[0];
+
+            if (!imageFile) {
+                alert('Please select an image to upload.');
+                return;
+            }
+
+            // Perform actual image upload API call here
+            const formData = new FormData();
+            formData.append('username', username);
+            formData.append('image', imageFile);
+
+            try {
+                const response = await fetch('http://localhost:4000/rulemate/v1/vecnoimg', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Image upload successful, redirect to detect.html with the username
+                    window.location.href = `detect.html?username=${username}`;
+                } else {
+                    // Handle image upload failure (e.g., show an error message)
+                    alert(`Image upload failed: ${result.message}`);
+                }
+            } catch (error) {
+                console.error('Error during image upload:', error);
+            }
+        });
+    </script>
+</body>
+</html>

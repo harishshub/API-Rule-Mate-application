@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+</head>
+<body>
+    <h1>Registration Page</h1>
+    <form id="registrationForm">
+        <!-- Your registration form fields go here -->
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="cnfpassword">Confirm Password:</label>
+        <input type="password" id="cnfpassword" name="cnfpassword" required>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const cnfpassword = document.getElementById('cnfpassword').value;
+
+            try {
+                // Perform actual registration API call here
+                const response = await fetch('http://localhost:4000/rulemate/v1/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name, username, password, cnfpassword }),
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Registration successful, redirect to image.html
+                    window.location.href = `image.html?username=${username}`;
+                } else {
+                    // Handle registration failure (e.g., show an error message)
+                    alert(`Registration failed: ${result.message}`);
+                }
+            } catch (error) {
+                console.error('Error during registration:', error);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Detection</title>
+</head>
+<body>
+    <h1>Vehicle Detection Page</h1>
+    
+    <!-- Display username from URL parameters -->
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" readonly>
+
+    <form id="vehicleDetectionForm">
+        <!-- Your vehicle detection form fields go here -->
+        <label for="vecnumber">Enter Vehicle Number:</label>
+        <input type="text" id="vecnumber" name="vecnumber" required>
+
+        <button type="submit">Detect Vehicle</button>
+    </form>
+
+    <script>
+        // Function to extract username from URL parameters
+        function getUsernameFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('username');
+        }
+
+        // Set the username in the textbox
+        const usernameInput = document.getElementById('username');
+        usernameInput.value = getUsernameFromUrl();
+
+        document.getElementById('vehicleDetectionForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const username = getUsernameFromUrl();
+            const vecnumber = document.getElementById('vecnumber').value;
+
+            // Perform actual vehicle detection API call here
+            try {
+                const response = await fetch('http://localhost:4000/rulemate/v1/detection', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, vecnumber }),
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Vehicle detection successful, redirect to complaint.html with the username
+                    window.location.href = `complaint.html?username=${username}&vecnumber=${vecnumber}`;
+                } else {
+                    // Handle vehicle detection failure (e.g., show an error message)
+                    alert(`Vehicle detection failed: ${result.message}`);
+                }
+            } catch (error) {
+                console.error('Error during vehicle detection:', error);
+            }
+        });
+    </script>
+</body>
+</html>
