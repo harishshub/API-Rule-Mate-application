@@ -1,11 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>letter</title>
+    <title>Complaint Letter</title>
+    <link rel="stylesheet" href="../css/styles.css" />
 </head>
+
 <body>
-    <h1>Letter</h1>
+    <div class="container"> <div id="letterContent"></div></div>
+   
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const username = urlParams.get('username');
+            try {
+                const response = await fetch(`http://localhost:4000/rulemate/v1/letter?username=${username}`);
+                const result = await response.text();
+
+                document.getElementById('letterContent').innerHTML = result;
+            } catch (error) {
+                console.error('Error fetching letter content:', error);
+            }
+        });
+    </script>
 </body>
 </html>

@@ -118,8 +118,10 @@ router.post(
     if (!req.file || !username) {
       res.status(400).json({ message: "Image or username are required!!" });
     }
-    const imgbuffer = req.file.buffer;
 
+    const imgbuffer = req.file.buffer;
+// Log the length of the image buffer
+console.log("Image buffer length:", imgbuffer.length);
     db.query(queries.insertImage, [username, imgbuffer], (err) => {
       if (err) {
         console.log("Image insertion failed");
@@ -173,17 +175,17 @@ router.post(
 
     let { name, username, vecno, crime, area, date, fineamt, duedate } = req.body;
 
-    if (!name || !username || !vecno || !crime || !area || !date || !fineamt || !duedate) {
-      name = req.query.name;
-      username = req.query.username;
-      vecno = req.query.vecno;
-      crime = req.query.crime;
-      area = req.query.area;
-      date = req.query.date;
-      fineamt = req.query.fineamt;
-      duedate = req.query.duedate;
-    }
-
+    // if (!name || !username || !vecno || !crime || !area || !date || !fineamt || !duedate) {
+    //   name = req.query.name;
+    //   username = req.query.username;
+    //   vecno = req.query.vecno;
+    //   crime = req.query.crime;
+    //   area = req.query.area;
+    //   date = req.query.date;
+    //   fineamt = req.query.fineamt;
+    //   duedate = req.query.duedate;
+    // }
+    console.log(name, username, vecno, crime, area, date, fineamt, duedate);
     if (!name || !username || !vecno || !crime || !area || !date || !fineamt || !duedate) {
       return res.status(400).json({ message: "Data insufficient!!  Please fill all the details" });
     }
@@ -198,13 +200,15 @@ router.post(
             reject(err);
           } else {
             console.log("Complaint insertion success");
+            res.json({ message: "Complaint Table insertion success!" });
             resolve();
+
           }
         });
       });
 
       // Only send one response to the client
-      return res.redirect('/success-page');
+      //return res.redirect('/success-page');
     } catch (error) {
       console.error('Error during complaint insertion:', error);
       return res.status(500).json({ message: "Complaint Table insertion failed! " });
@@ -221,7 +225,13 @@ router.get(
     if (!validator.checkValidation(req, res)) {
       return;
     }
-    const { username } = req.body;
+    
+    let username = req.body.username;
+
+    if (!username) {
+      username = req.query.username;
+    }
+
     // Fetch details from the complaint and image tables using username
     db.query(queries.selectComplintInfo, [username], (err, resultComplaint) => {
       if (err) {
@@ -276,6 +286,7 @@ router.get(
               )}" alt="Vehicle Image" style="max-width: 100%;">
             `;
             } else {
+              console.log(complaintDetails);
               letterContent = "No complaint found for the given username.";
             }
 
@@ -287,5 +298,6 @@ router.get(
     });
   }
 );
+
 
 module.exports = router;

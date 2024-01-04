@@ -4,21 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Upload</title>
+    <link rel="stylesheet" href="../css/styles.css" />
 </head>
 <body>
-    <h1>Image Upload Page</h1>
+    <div class="container">
+           <h1 class="container-head">Image Upload Page</h1>
     
     <!-- Display username from URL parameters -->
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" readonly>
-
-    <form id="imageUploadForm" enctype="multipart/form-data">
+    <label class="inputs" for="username">Username:</label>
+    <input class="inputs" type="text" id="username" name="username" readonly>
+    
+    <form class="form" id="imageUploadForm" enctype="multipart/form-data">
         <!-- Your image upload form fields go here -->
-        <label for="image">Upload Image:</label>
-        <input type="file" id="image" name="image" accept="image/jpeg, image/png" required>
-
-        <button type="submit">Upload Image</button>
+        <label class="inputs" for="image">Upload Image:</label>
+        
+        <input class="inputs" type="file" id="image" name="image" accept="image/jpeg, image/png" required>
+        <br>
+        <button class="inputs" type="submit">Upload Image</button>
     </form>
+ 
+    </div>
 
     <script>
         // Function to extract username from URL parameters

@@ -1,49 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complaint</title>
+    <link rel="stylesheet" href="../css/styles.css" />
 </head>
+
 <body>
-    <h1>Registration Page</h1>
-    <form id="complaintForm">
+    <div class="container">    
+        <h1 class="container-head">Complaint Registration Page</h1>
+    <form class="form" id="complaintForm">
         <!-- Your registration form fields go here -->
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+        <label class="inputs" for="name">Name:</label>
+        <input class="inputs" type="text" id="name" name="name" required>
 
-        <label for="vecnumber">Vehicle Number:</label>
-        <input type="text" id="vecnumber" name="vecnumber" required>
+        <label class="inputs" for="username">Username:</label>
+        <input class="inputs" type="text" id="username" name="username" required>
 
-        <label for="crime">Type of Crime:</label>
-        <input type="text" id="crime" name="crime" required>
+        <label class="inputs" for="vecno">Vehicle Number:</label>
+        <input class="inputs" type="text" id="vecno" name="vecno" required>
 
-        <label for="area">Crime Area:</label>
-        <input type="text" id="area" name="area" required>
+        <label class="inputs" for="crime">Type of Crime:</label>
+        <input class="inputs" type="text" id="crime" name="crime" required>
 
-        <label for="date">Date of Crime:</label>
-        <input type="date" id="date" name="date" required>
+        <label class="inputs" for="area">Crime Area:</label>
+        <input class="inputs" type="text" id="area" name="area" required>
 
-        <label for="fineamt">Fine Amount:</label>
-        <input type="number" id="fineamt" name="fineamt" required>
+        <label class="inputs" for="date">Date of Crime:</label>
+        <input class="inputs" type="date" id="date" name="date" required>
 
-        <label for="duedate">Due Date:</label>
-        <input type="date" id="duedate" name="duedate" required>
+        <label class="inputs" for="fineamt">Fine Amount:</label>
+        <input class="inputs" type="number" id="fineamt" name="fineamt" required>
+
+        <label class="inputs" for="duedate">Due Date:</label>
+        <input class="inputs" type="date" id="duedate" name="duedate" required>
 
 
-        <button type="submit">Register</button>
+        <button class="inputs" type="submit">Register</button>
     </form>
+</div>
 
     <script>
-        document.getElementById('complaintForm').addEventListener('submit', async function(event) {
+        document.getElementById('complaintForm').addEventListener('submit', async function (event) {
             event.preventDefault();
 
             const name = document.getElementById('name').value;
             const username = document.getElementById('username').value;
-            const vecnumber = document.getElementById('vecnumber').value;
+            const vecno = document.getElementById('vecno').value;
             const crime = document.getElementById('crime').value;
             const area = document.getElementById('area').value;
             const date = document.getElementById('date').value;
@@ -52,19 +57,24 @@
 
 
             try {
-                // Perform actual registration API call here
-                const response = await fetch('http://localhost:4000/rulemate/v1/complaint', {
+                const response = await fetch('http://localhost:4000/rulemate/v1/complaint',
+                 {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ name, username, vecnumber, crime, area, date, fineamt, duedate  }),
+                    body: JSON.stringify({ name, username, vecno, crime, area, date, fineamt, duedate }),
+
                 });
+
+
+
+                
 
                 const result = await response.json();
 
                 if (response.ok) {
-                    // Registration successful, redirect to image.html
+                    // Registration successful, redirect to letter.html
                     window.location.href = `letter.html?username=${username}`;
                 } else {
                     // Handle registration failure (e.g., show an error message)
@@ -73,7 +83,9 @@
             } catch (error) {
                 console.error('Error during registration:', error);
             }
+
         });
     </script>
 </body>
+
 </html>

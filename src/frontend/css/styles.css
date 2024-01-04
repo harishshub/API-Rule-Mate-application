@@ -1,0 +1,31 @@
+
+.container{
+    margin-top: 10%;
+    margin-bottom: 10%;
+    background: rgb(185,43,39);
+    background: linear-gradient(90deg, rgba(185,43,39,1) 0%, rgba(255,255,255,1) 50%, rgba(21,101,192,1) 100%);
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container-head{
+    padding: 5px;
+    text-decoration: underline;
+}
+.form{
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.inputs{
+    font-size: 20px;
+    margin: 5px;
+}
+
+.input,#image{
+    margin-left: 100px;
+}

@@ -4,25 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
+    <link rel="stylesheet" href="../css/styles.css" />
 </head>
 <body>
-    <h1>Registration Page</h1>
-    <form id="registrationForm">
+    <div class="container">
+           <h1 class="container-head">Registration Page</h1>
+    <form class="form" id="registrationForm">
         <!-- Your registration form fields go here -->
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+        <label class="inputs" for="name">Name:</label>
+        <input class="inputs" type="text" id="name" name="name" required>
         
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+        <label class="inputs" for="username">Username:</label>
+        <input class="inputs" type="text" id="username" name="username" required>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+        <label class="inputs" for="password">Password:</label>
+        <input class="inputs" type="password" id="password" name="password" required>
 
-        <label for="cnfpassword">Confirm Password:</label>
-        <input type="password" id="cnfpassword" name="cnfpassword" required>
+        <label class="inputs" for="cnfpassword">Confirm Password:</label>
+        <input class="inputs" type="password" id="cnfpassword" name="cnfpassword" required>
 
-        <button type="submit">Register</button>
-    </form>
+        <button class="inputs" type="submit">Register</button>
+    </form> 
+    </div>
+
 
     <script>
         document.getElementById('registrationForm').addEventListener('submit', async function(event) {
@@ -44,6 +48,8 @@
                 });
 
                 const result = await response.json();
+                
+
 
                 if (response.ok) {
                     // Registration successful, redirect to image.html

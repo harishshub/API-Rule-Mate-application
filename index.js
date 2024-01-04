@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const compression = require("./src/Middleware/compression"); 
 const helmet = require("./src/Middleware/helmet"); 
 const config = require("./src/config");
-const routes = require("./src/routes");
+const routes = require("./src/Routes");
 const db = require("./src/config/database");
 const cors = require('cors')
 

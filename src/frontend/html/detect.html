@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vehicle Detection</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+
 </head>
+
 <body>
-    <h1>Vehicle Detection Page</h1>
-    
-    <!-- Display username from URL parameters -->
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" readonly>
+    <div class="container">
+        <h1 class="container-head">Vehicle Detection Page</h1>
 
-    <form id="vehicleDetectionForm">
-        <!-- Your vehicle detection form fields go here -->
-        <label for="vecnumber">Enter Vehicle Number:</label>
-        <input type="text" id="vecnumber" name="vecnumber" required>
+        <!-- Display username from URL parameters -->
+        <label class="inputs" for="username">Username:</label>
+        <input class="inputs" type="text" id="username" name="username" readonly>
 
-        <button type="submit">Detect Vehicle</button>
-    </form>
+        <form class="form" id="vehicleDetectionForm">
+            <!-- Your vehicle detection form fields go here -->
+            <label class="inputs" for="vecnumber">Enter Vehicle Number:</label>
+            <input class="inputs" type="text" id="vecnumber" name="vecnumber" required>
+
+            <button class="inputs" type="submit">Detect Vehicle</button>
+        </form>
+    </div>
+
+
 
     <script>
         // Function to extract username from URL parameters
@@ -31,7 +39,7 @@
         const usernameInput = document.getElementById('username');
         usernameInput.value = getUsernameFromUrl();
 
-        document.getElementById('vehicleDetectionForm').addEventListener('submit', async function(event) {
+        document.getElementById('vehicleDetectionForm').addEventListener('submit', async function (event) {
             event.preventDefault();
 
             const username = getUsernameFromUrl();
@@ -62,4 +70,5 @@
         });
     </script>
 </body>
+
 </html>

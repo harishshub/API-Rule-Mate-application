@@ -1,13 +1,13 @@
 const queries = {
     //insertion queries
-    insertUserInfo:"INSERT INTO userinfo(name,username,password) VALUES (?,?,?)",
+    insertUserInfo:"INSERT INTO userinfos(name,username,password) VALUES (?,?,?)",
     insertImage:"INSERT INTO vecnoimg(username,image) VALUES (?,?)",
-    insertComplaintInfo:"INSERT INTO complaint(name,username,vecno,crime,area,date,fineamt,duedate) VALUES (?,?,?,?,?,?,?,?)",
+    insertComplaintInfo:"INSERT INTO complaints(name,username,vecno,crime,area,date,fineamt,duedate) VALUES (?,?,?,?,?,?,?,?)",
 
     //selection queries
-    selectUserInfo:"SELECT * FROM userinfo WHERE username = ?", 
+    selectUserInfo:"SELECT * FROM userinfos WHERE username = ?", 
     selectImage:"SELECT image FROM vecnoimg WHERE username =?",
-    selectComplintInfo:"SELECT * FROM complaint WHERE username =?",
+    selectComplintInfo:"SELECT * FROM complaints WHERE username =?",
     
 
     //updation queries
